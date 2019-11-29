@@ -21,11 +21,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDAO;
+import br.com.casadocodigo.loja.models.Carrinho;
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.utils.FileSaver;
 
@@ -34,9 +37,10 @@ import br.com.casadocodigo.loja.utils.FileSaver;
 @ComponentScan(basePackageClasses = {
 	HomeController.class,
 	ProdutoDAO.class,
-	FileSaver.class
+	FileSaver.class,
+	Carrinho.class
 })
-public class LojaConfiguration {
+public class LojaConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolverFactory() {
@@ -44,6 +48,7 @@ public class LojaConfiguration {
 		
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
+		resolver.setExposedContextBeanNames("carrinho");
 		
 		return resolver;
 	}
@@ -103,6 +108,11 @@ public class LojaConfiguration {
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
+	}
+	
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
 	}
 	
 }

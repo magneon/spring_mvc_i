@@ -36,7 +36,7 @@
 				<nav id="main-nav">
 
 					<ul class="clearfix">
-						<li><a href="/cart" rel="nofollow">Carrinho</a></li>
+						<li><a href="/cart" rel="nofollow">Carrinho (${carrinho.quantidade})</a></li>
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
 						<li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas Frequentes</a></li>
 					</ul>
@@ -62,28 +62,31 @@
 			<div id="product-overview" class="container">
 				<img width="280px" height="395px" src="http://cdn.shopify.com/s/files/1/0155/7645/products/css-eficiente-featured_large.png?v=1435245145"
 					class="product-featured-image" />
-				<h1 class="product-title">AQUI COLOQUE O TÍTULO</h1>
+				<h1 class="product-title">${produto.titulo}</h1>
 				<p class="product-author">
 					<span class="product-author-link"> </span>
 				</p>
-				<p class="book-description">AQUI COLOQUE A DESCRIÇÃO</p>
+				<p class="book-description">${produto.descricao}</p>
 			</div>
 		</header>
 
 		<section class="buy-options clearfix">
-			<form action="/carrinho/add" method="post" class="container">
-				<input type="hidden" value="AQUI COLOQUE A ID DO PRODUTO" name="produtoId" >
-				<ul id="variants" class="clearfix">
+			<form action='<c:url value="/carrinho/add"/>' method="post" class="container">
+				<input type="hidden" value="${produto.id}" name="produtoId" >
 				
+				<c:forEach items="${produto.precos}" var="preco">
+					
+					<ul id="variants" class="clearfix">
 						<li class="buy-option">
-							<input type="radio" name="tipoPreco" class="variant-radio" id="tipoPreco" value="AQUI COLOQUE O TIPO DO PRECO" checked="checked" /> 
-							<label class="variant-label">AQUI COLOQUE O TIPO DO PRECO</label> 
+							<input type="radio" name="tipoPreco" class="variant-radio" id="tipoPreco" value="${preco.tipo}" checked="checked" /> 
+							<label class="variant-label">${preco.tipo}</label> 
 							<small class="compare-at-price">R$ 39,90</small>
-							<p class="variant-price">AQUI COLOQUE O VALOR DO PRECO</p>
+							<p class="variant-price">${preco.valor}</p>
 						</li>
-						
-				</ul>
-				<button type="submit" class="submit-image icon-basket-alt" title="Compre Agora AQUI COLOQUE O TITULO"></button>
+					</ul>
+				</c:forEach>
+				
+				<button type="submit" class="submit-image icon-basket-alt" title="Compre Agora ${produto.titulo}"></button>
 			</form>
 		</section>
 
@@ -99,10 +102,10 @@
 			<section class="data product-detail">
 				<h2 class="section-title">Dados do livro:</h2>
 				<p>
-					Número de páginas: <span>AQUI O NÚMERO DE PÁGINAS</span>
+					Número de páginas: <span>${produto.paginas}</span>
 				</p>
 				<p></p>
-				<p>Data de publicação: AQUI A DATA DE PUBLICAÇÃO</p>
+				<p>Data de publicação: ${produto.dataLancamento}</p>
 				<p>
 					Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta uma errata</a>
 				</p>

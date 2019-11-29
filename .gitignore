@@ -4,3 +4,10 @@ casadocodigo/.settings/
 casadocodigo/.tern-project
 
 *.class
+/.metadata/
+
+RemoteSystemsTempFiles/
+
+Servers/
+
+casadocodigo/target/m2e-wtp/web-resources/META-INF/maven/org.casadocodigo/casadocodigo/pom.properties
