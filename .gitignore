@@ -11,3 +11,5 @@ RemoteSystemsTempFiles/
 Servers/
 
 casadocodigo/target/m2e-wtp/web-resources/META-INF/maven/org.casadocodigo/casadocodigo/pom.properties
+
+.recommenders/caches/

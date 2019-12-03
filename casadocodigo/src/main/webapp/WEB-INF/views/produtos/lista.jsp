@@ -12,6 +12,7 @@
 	
 	<div>
 		${sucesso}
+		${falha}
 	</div>
 
 	<table>
